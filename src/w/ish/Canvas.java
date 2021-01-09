@@ -75,9 +75,34 @@ public class Canvas {
   }
 
   public void bucketFill(int x, int y, char c) {
-
+    if (!isValidXAxis(x) || !isValidYAxis(y)) {
+      System.out.print("Invalid number provided");
+    } else {
+      if (canvas[x-1][y-1] != ' ') {
+        System.out.print("Cannot change line color.");
+      } else {
+        fillColor(x - 1, y - 1, c);
+      }
+    }
   }
 
+  private void fillColor(int x, int y, char c) {
+    if (canvas[x][y] == ' ') {
+      canvas[x][y] = c;
+      if (x != 0) {
+        fillColor(x - 1, y, c);
+      }
+      if (x < canvas.length - 1) {
+        fillColor(x + 1, y, c);
+      }
+      if (y != 0) {
+        fillColor(x, y - 1, c);
+      }
+      if (y < canvas[0].length - 1) {
+        fillColor(x, y + 1, c);
+      }
+    }
+  }
   private void printHorizontalBorder() {
     System.out.print("--");
     for (int i = 0; i < canvas.length; i++) {
