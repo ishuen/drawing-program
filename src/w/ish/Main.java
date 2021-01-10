@@ -12,29 +12,34 @@ public class Main {
         boolean isCanvasCreated = false;
         while (!input.equals(USER_INPUT_PREFIX + 'Q')) {
             String[] command = input.split(" ");
+            if (!isCommand(command)) {
+                input = scanner.nextLine();
+                continue;
+            }
             switch (command[2]) {
                 case "C":
-                    if (isValidArgument(command, 5)) {
-                        canvas.createCanvas(Integer.parseInt(command[3]), Integer.parseInt(command[4]));
-                        isCanvasCreated = true;
-                    }
+                    isCanvasCreated = FormatHandler.handleFormat(() ->
+                            canvas.createCanvas(Integer.parseInt(command[3]), Integer.parseInt(command[4])));
                     break;
                 case "L":
-                    if (isValidArgument(command, 7) && isCanvasCreated) {
-                        canvas.createNewLine(Integer.parseInt(command[3]), Integer.parseInt(command[4]),
-                                Integer.parseInt(command[5]), Integer.parseInt(command[6]));
+                    if (isCanvasCreated) {
+                        FormatHandler.handleFormat(() -> canvas.createNewLine(Integer.parseInt(command[3]),
+                                Integer.parseInt(command[4]), Integer.parseInt(command[5]), Integer.parseInt(command[6])));
                     }
                     break;
                 case "R":
-                    if (isValidArgument(command, 7) && isCanvasCreated) {
-                        canvas.createRectangle(Integer.parseInt(command[3]), Integer.parseInt(command[4]),
-                                Integer.parseInt(command[5]), Integer.parseInt(command[6]));
+                    if (isCanvasCreated) {
+                        FormatHandler.handleFormat(() -> canvas.createRectangle(Integer.parseInt(command[3]),
+                                Integer.parseInt(command[4]), Integer.parseInt(command[5]), Integer.parseInt(command[6])));
                     }
                     break;
                 case "B":
-                    if (isValidArgument(command, 6) && isCanvasCreated) {
-                        canvas.bucketFill(Integer.parseInt(command[3]), Integer.parseInt(command[4]), command[5].charAt(0));
+                    if (isCanvasCreated) {
+                        FormatHandler.handleFormat(() -> canvas.bucketFill(Integer.parseInt(command[3]), Integer.parseInt(command[4]), command[5].charAt(0)));
                     }
+                    break;
+                default:
+                    System.out.println("Invalid input.");
                     break;
             }
             if (isCanvasCreated) {
@@ -43,8 +48,9 @@ public class Main {
             input = scanner.nextLine();
         }
     }
-    private static boolean isValidArgument(String[] input, int expected) {
-        if (input.length != expected) {
+
+    private static boolean isCommand(String[] input) {
+        if (input.length < 3) {
             System.out.println("Invalid input.");
             return false;
         }

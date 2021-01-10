@@ -94,10 +94,14 @@ enter command: Q
 
 1. Canvas should be large enough to draw. That is, the value of width and height should be greater than 0.
 
-2. Drawing cannot be done on the border of the canvas, i.e. the value of x and y should be larger than 0 and smaller than or equal to user defined width and height.
+2. When the create new canvas command is entered, the previously created canvas is discarded.
 
-### System limitation
+3. Drawing cannot be done on the line or border of the canvas, i.e. the value of x and y should be larger than 0 and smaller than or equal to user defined width and height.
+
+### System behavior / limitation
 
 1. Canvas size should not exceed `Integer.MAX_VALUE`, 2147483647.
 
-2. When the invalid command is given, the error message is shown and the operation is aborted.
+2. When the invalid command is given, the error message is shown and the operation is aborted and show the current canvas if it is already created.
+
+3. When the number of command arguments is larger than required number, the extra arguments are ignored.
