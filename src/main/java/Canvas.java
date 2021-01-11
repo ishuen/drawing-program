@@ -1,9 +1,7 @@
-package w.ish;
-
 import java.util.Arrays;
 
 public class Canvas {
-  char[][] canvas;
+  private char[][] canvas;
 
   public boolean createCanvas(int width, int height) {
     if (width < 1 || height < 1) {

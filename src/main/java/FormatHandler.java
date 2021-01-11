@@ -1,5 +1,3 @@
-package w.ish;
-
 import java.util.concurrent.Callable;
 
 public class FormatHandler {
