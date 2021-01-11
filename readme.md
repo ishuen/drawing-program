@@ -88,6 +88,39 @@ enter command: B 10 3 o
 
 enter command: Q
 
+### Usage
+
+#### Approach I
+
+1. Turn on terminal
+
+2. Build the project
+
+	Note: while creating the package, the test cases will be executed. If you want to skip the test, please add `-DskipTests=true` at the end of command
+
+	``` 
+	mvn clean package
+	```
+
+3. Execute the program
+
+	```
+	java -cp target/drawing-1.0-SNAPSHOT.jar Main
+	```
+
+4. Enter commands
+
+	e.g. enter the command to create a canvas of width = 1 and height = 1.
+
+	```
+	C 1 1
+	```
+
+#### Approach II
+
+1. Open the project with IDE
+
+2. Build the project and run application
 
 
 ### Assumption
